@@ -176,6 +176,16 @@ public final class Session extends Thread {
 		return terminal.dumpHtml(color, clientTimestamp);
 	}
 
+	public void sendKeys(String keys) throws IOException {
+		lastAccess = System.currentTimeMillis();
+		write(keys);
+	}
+
+	public ScreenImage getView(boolean color, int clientTimestamp) {
+		terminal.setCssClass(isAlive() ? "" : "dead");
+		return terminal.dumpHtml(color, clientTimestamp);
+	}
+
 	/**
 	 * Write to the child process.
 	 */
